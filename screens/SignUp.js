@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   BottomView: {
     width: "100%",
-    height: "95%",
+    height: "94%",
     backgroundColor: "black",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
