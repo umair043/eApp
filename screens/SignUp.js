@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -8,12 +8,29 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-
 import BackIcon from "react-native-vector-icons/Feather";
+import { firebase } from "../Firebase/firebase";
 
 const SignUp = ({ navigation }) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const [confrimPassword, setConfrimPassword] = useState("");
+
+  function fullNameChange(value) {
+    setFullName(value);
+  }
+
   function navigate() {
     navigation.navigate("signIn");
+  }
+
+  function createUser() {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {});
   }
   return (
     <View style={styles.mainView}>
@@ -36,33 +53,39 @@ const SignUp = ({ navigation }) => {
         </Text>
         <View style={styles.FormView}>
           <TextInput
+            onChange={fullNameChange}
+            value={fullName}
             placeholder={"Full name"}
             placeholderTextColor={"#fff"}
             style={styles.TextInput}
           />
           <TextInput
-            placeholder={"Email adress"}
+            onChangeText={(val) => setEmail(val)}
+            placeholder={"Email address"}
             placeholderTextColor={"#fff"}
             style={styles.TextInput}
           />
           <TextInput
+            onChangeText={(val) => setMobile(val)}
             placeholder={"Mobile"}
             placeholderTextColor={"#fff"}
             style={styles.TextInput}
           />
           <TextInput
-            placeholder={"Password"}
+            onChangeText={(val) => setPassword(val)}
+            placeholder={"password"}
             secureTextEntry={true}
             placeholderTextColor={"#fff"}
             style={styles.TextInput}
           />
           <TextInput
+            onChangeText={(val) => setConfrimPassword(val)}
             placeholder={"Confrim Password"}
             secureTextEntry={true}
             placeholderTextColor={"#fff"}
             style={styles.TextInput}
           />
-          <TouchableOpacity style={styles.Button}>
+          <TouchableOpacity onPress={createUser} style={styles.Button}>
             <Text style={styles.BotomText}> SignUP</Text>
           </TouchableOpacity>
         </View>

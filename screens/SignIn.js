@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+
 const SignIn = ({ navigation }) => {
   function navigate() {
     navigation.navigate("signUp");
